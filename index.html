@@ -1,5 +1,172 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        color: #eeeeee;
+        background-color: #1a2026;
+        min-height: 100vh;
+        padding-top: 4rem;
+      }
+      h1 {
+        font-family: "Exo 2", sans-serif;
+      }
+      footer {
+        position: relative;
+        height: 75px;
+        width: 100%;
+        margin-top: -75px !important;
+      }
+      a {
+        text-decoration: none;
+        color: rgba(19, 205, 251, 1);
+        transition: all 0.25s;
+      }
+      a:hover {
+        color: rgba(61, 254, 160, 1);
+      }
+      a svg {
+        fill: #6c757d;
+        transition: all 0.25s;
+      }
+      a svg:hover {
+        fill: rgba(19, 205, 251, 1);
+      }
+      .max-width-800px {
+        max-width: 800px;
+      }
+      .text-thor {
+        background-image: linear-gradient(
+          45deg,
+          rgba(19, 205, 251, 1) 0%,
+          rgb(79, 197, 140) 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
+      }
+      .btn-thor {
+        color: rgba(61, 254, 160, 1);
+        border: 1px solid rgba(61, 254, 160, 1);
+        transition: all 0.25s;
+      }
+      .btn-thor:hover {
+        background-image: linear-gradient(
+          45deg,
+          rgba(19, 205, 251, 1) 0%,
+          rgba(61, 254, 160, 1) 100%
+        );
+        color: black;
+      }
+    </style>
+
+    <title>Hello World!</title>
+  </head>
   <body>
-    <script src="./src/index.ts"></script>
+    <div class="container max-width-800px" style="height: calc(100vh - 5rem)">
+      <h1 class="w-100 mb-5 text-thor">Convert mnemonic to JSON keystore</h1>
+      <div class="mb-4 fs-5">
+        <label for="mnemonicInput" class="form-label">
+          Your mnemonic phrases
+        </label>
+        <textarea class="form-control" id="mnemonicInput"></textarea>
+        <div id="mnemonicFeedback" class="invalid-feedback">
+          Invalid mnemonic!
+        </div>
+      </div>
+      <div class="mb-4 fs-5">
+        <label for="passwordInput" class="form-label">
+          Password to encrypt your private key
+        </label>
+        <input type="password" class="form-control" id="passwordInput" />
+        <div id="passwordFeedback" class="invalid-feedback">
+          Password cannot be empty!
+        </div>
+      </div>
+      <div class="mb-5 fs-5">
+        <button id="submitBtn" class="btn btn-lg btn-thor">Convert</button>
+      </div>
+      <div class="fs-5">
+        ⚠️ WARNING ⚠️ Do NOT use this tool online. Download the source code and
+        use it while disconnected to the internet. See instructions
+        <a
+          href="https://github.com/0xlarry/encrypt-keystore/blob/main/README.md"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          👉 here 👈
+        </a>
+      </div>
+    </div>
+
+    <footer
+      class="container d-flex align-items-center fs-5 mx-auto max-width-800px"
+    >
+      <div class="text-muted me-auto">
+        Created by
+        <a
+          href="https://twitter.com/_0x_larry"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          0x_larry
+        </a>
+      </div>
+      <div class="ms-auto">
+        <a
+          href="https://github.com/0xlarry/encrypt-keystore"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="currentColor"
+            class="bi bi-github"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="src/index.ts"></script>
   </body>
 </html>
